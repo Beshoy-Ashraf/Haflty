@@ -1,4 +1,5 @@
 using System.Text;
+using Haflty;
 using Haflty.Models.Context;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -10,6 +11,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddEndpointsApiExplorer();
+builder.Services.RegisterBusinessServices();
+builder.Services.AddControllers();
 
 builder.Services.AddDbContext<AppDBContext>(opt =>
 {
@@ -39,6 +42,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+app.UseCors("AllowAll");
+app.MapControllers();
 
 app.Run();
 

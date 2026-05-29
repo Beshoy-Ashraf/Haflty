@@ -143,3 +143,5 @@
 /home/besho/API/Haflty/Haflty/bin/Debug/net9.0/Microsoft.IdentityModel.Tokens.dll
 /home/besho/API/Haflty/Haflty/bin/Debug/net9.0/System.IdentityModel.Tokens.Jwt.dll
 /home/besho/API/Haflty/Haflty/bin/Debug/net9.0/Swashbuckle.AspNetCore.SwaggerUI.dll
+/home/besho/API/Haflty/Haflty/obj/Debug/net9.0/Haflty.sourcelink.json
+/home/besho/API/Haflty/Haflty/bin/Debug/net9.0/BCrypt.Net-Core.dll
