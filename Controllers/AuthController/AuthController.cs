@@ -1,5 +1,5 @@
-using Haflty.DTO.UserModel.Request;
-using Haflty.DTO.UserModel.Response;
+using Haflty.DTO.UserDto.Request;
+using Haflty.DTO.UserDto.Response;
 using Haflty.Services.AuthService.Interface;
 using Microsoft.AspNetCore.Mvc;
 
@@ -13,11 +13,12 @@ public class AuthController(IAuthService authService) : ControllerBase
 
       [Route("add-user")]
       [HttpPost]
-      public async Task<ActionResult<TokenResponseModel>> RegisterUser(RegisterUserModel userModel, CancellationToken cancellationToken)
+      public async Task<ActionResult<TokenResponseDto>> RegisterUser(RegisterUserDto
+ UserDto, CancellationToken cancellationToken)
       {
             try
             {
-                  var response = await _authService.GenerateUser(userModel, cancellationToken);
+                  var response = await _authService.GenerateUser(UserDto, cancellationToken);
                   return Ok(response);
             }
             catch (ArgumentException ex)

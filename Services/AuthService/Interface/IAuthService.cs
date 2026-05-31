@@ -1,9 +1,10 @@
-using Haflty.DTO.UserModel.Request;
-using Haflty.DTO.UserModel.Response;
+using Haflty.DTO.UserDto.Request;
+using Haflty.DTO.UserDto.Response;
 
 namespace Haflty.Services.AuthService.Interface;
 
 public interface IAuthService
 {
-      Task<TokenResponseModel> GenerateUser(RegisterUserModel userModel, CancellationToken cancellationToken);
+      Task<TokenResponseDto> GenerateUser(RegisterUserDto
+ UserDto, CancellationToken cancellationToken);
 }

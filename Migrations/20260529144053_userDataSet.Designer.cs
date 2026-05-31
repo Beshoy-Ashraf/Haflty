@@ -25,7 +25,7 @@ namespace Haflty.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("Haflty.Models.Modules.User.User", b =>
+            modelBuilder.Entity("Haflty.Models.Entities.User.User", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()

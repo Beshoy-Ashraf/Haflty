@@ -1,8 +1,8 @@
 using Haflty.Core.Enum;
 
-namespace Haflty.Models.Modules.User;
+namespace Haflty.DTO.UserDto.Response;
 
-public class User
+public class UserDto
 {
       public Guid Id { get; set; }
 
@@ -12,12 +12,6 @@ public class User
       public string UserName { get; set; } = "";
       public string Address { get; set; } = "";
       public UserRole UserRole { get; set; }
-      public string HashPassword { get; set; } = "";
       public DateTime BirthDate { get; set; }
       public string QRCode { get; set; } = "";
-
-      public DateTime CreatedDate { get; set; }
-      public DateTime UpdatedDate { get; set; }
-      public DateTime DeletedDate { get; set; }
 }
-

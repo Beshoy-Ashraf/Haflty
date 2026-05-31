@@ -1,9 +1,9 @@
 using System.Net.Quic;
 using Haflty.Core.Enum;
 
-namespace Haflty.DTO.UserModel.Request;
+namespace Haflty.DTO.UserDto.Request;
 
-public class RegisterUserModel
+public class RegisterUserDto
 {
       public string Name { get; set; } = "";
       public string Email { get; set; } = "";

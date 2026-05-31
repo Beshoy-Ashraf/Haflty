@@ -1,6 +1,6 @@
-namespace Haflty.DTO.UserModel.Response;
+namespace Haflty.DTO.UserDto.Response;
 
-public class TokenResponseModel
+public class TokenResponseDto
 {
       public string Token { get; set; } = "";
       public string RefreshToken { get; set; } = "";

@@ -1,10 +1,9 @@
 using System.Security.Claims;
 using System.Text;
-using Haflty.Core.Enum;
-using Haflty.DTO.UserModel.Request;
-using Haflty.DTO.UserModel.Response;
+using Haflty.DTO.UserDto.Request;
+using Haflty.DTO.UserDto.Response;
 using Haflty.Models.Context;
-using Haflty.Models.Modules.User;
+using Haflty.Models.Entities;
 using Haflty.Services.AuthService.Interface;
 using Microsoft.IdentityModel.JsonWebTokens;
 using Microsoft.IdentityModel.Tokens;
@@ -20,27 +19,27 @@ public class AuthService(ILogger<AuthService> logger, AppDBContext appDBContext,
 
 
 
-      public async Task<TokenResponseModel> GenerateUser(RegisterUserModel userModel, CancellationToken cancellationToken)
+      public async Task<TokenResponseDto> GenerateUser(RegisterUserDto UserDto, CancellationToken cancellationToken)
       {
-            if (_dbContext.Users.SingleOrDefault(x => x.Email == userModel.Email) != null)
+            if (_dbContext.Users.SingleOrDefault(x => x.Email == UserDto.Email) != null)
             {
                   throw new InvalidOperationException("A user with this email already exists.");
             }
-            if (_dbContext.Users.SingleOrDefault(x => x.UserName == userModel.UserName) != null)
+            if (_dbContext.Users.SingleOrDefault(x => x.UserName == UserDto.UserName) != null)
             {
                   throw new InvalidOperationException("A user with this UserName already exists.");
             }
             var user = new User
             {
-                  HashPassword = BCrypt.Net.BCrypt.HashPassword(userModel.HashPassword),
-                  Name = userModel.Name,
-                  Email = userModel.Email,
-                  Phone = userModel.Phone,
-                  UserName = userModel.UserName,
-                  Address = userModel.Address,
-                  UserRole = userModel.UserRole,
-                  BirthDate = userModel.BirthDate,
-                  QRCode = userModel.QRCode,
+                  HashPassword = BCrypt.Net.BCrypt.HashPassword(UserDto.HashPassword),
+                  Name = UserDto.Name,
+                  Email = UserDto.Email,
+                  Phone = UserDto.Phone,
+                  UserName = UserDto.UserName,
+                  Address = UserDto.Address,
+                  UserRole = UserDto.UserRole,
+                  BirthDate = UserDto.BirthDate,
+                  QRCode = UserDto.QRCode,
                   CreatedDate = DateTime.UtcNow,
                   UpdatedDate = DateTime.UtcNow,
             };
@@ -48,10 +47,10 @@ public class AuthService(ILogger<AuthService> logger, AppDBContext appDBContext,
             await _dbContext.SaveChangesAsync(cancellationToken);
             return GenerateAccessToken(user);
       }
-      public TokenResponseModel GenerateAccessToken(User user)
+      public TokenResponseDto GenerateAccessToken(User user)
       {
 
-            return new TokenResponseModel
+            return new TokenResponseDto
             {
                   Token = GenerateToken(user),
                   RefreshToken = "",

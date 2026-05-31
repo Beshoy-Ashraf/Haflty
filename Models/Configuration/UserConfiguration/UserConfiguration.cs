@@ -1,4 +1,4 @@
-using Haflty.Models.Modules.User;
+using Haflty.Models.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
