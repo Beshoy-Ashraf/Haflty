@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Haflty")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4886a208e108afc28d0a790d734dc0725ca863c1")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9666439970ccb2bd5aa3f0d6f7f133ac83c92a60")]
 [assembly: System.Reflection.AssemblyProductAttribute("Haflty")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Haflty")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

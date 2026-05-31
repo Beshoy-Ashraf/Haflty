@@ -3,7 +3,10 @@ using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Haflty.Models.Context;
 using Haflty.Repository.InterFace;
+using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace Haflty.Repository;
 
@@ -21,19 +24,41 @@ public class BaseRepository<T>(AppDBContext appDBContext) : IBaseRepository<T> w
       }
 
 
-      public async Task<T> Find(Expression<Func<T, bool>> criteria, string[]? includes = null)
+      public async Task<IEnumerable<T>> Find(Expression<Func<T, bool>> criteria, CancellationToken cancellationToken, string[]? includes = null)
       {
             IQueryable<T> query = _dbContext.Set<T>();
             if (includes != null)
                   foreach (var item in includes)
                         query.Include(item);
 
-            return await query.FirstOrDefaultAsync(criteria) ?? throw new KeyNotFoundException("No Data found."); ;
+            return await query.Where(criteria).ToListAsync(cancellationToken) ?? throw new KeyNotFoundException("No Data found."); ;
       }
-      public async Task<T> AddAsync(T entities)
+      public async Task<IEnumerable<T>> Find(Expression<Func<T, bool>> criteria, CancellationToken cancellationToken)
       {
-            await _dbContext.Set<T>().AddAsync(entities);
+
+            return await _dbContext.Set<T>().Where(criteria).ToListAsync(cancellationToken) ?? throw new KeyNotFoundException("No Data found."); ;
+      }
+      public async Task<T> AddAsync(T entities, CancellationToken cancellationToken)
+      {
+            await _dbContext.Set<T>().AddAsync(entities, cancellationToken);
+            await _dbContext.SaveChangesAsync(cancellationToken);
+
             return entities;
+      }
+      public async Task<IEnumerable<T>> AddRange(IEnumerable<T> entities, CancellationToken cancellationToken)
+      {
+            await _dbContext.AddRangeAsync(entities, cancellationToken);
+            await _dbContext.SaveChangesAsync(cancellationToken);
+            return entities;
+      }
+      public async Task<IActionResult> DeleteEntityAsync(Guid id, CancellationToken cancellationToken)
+      {
+            var entity = await _dbContext.Set<T>().FindAsync(id, cancellationToken);
+            if (entity == null)
+                  throw new KeyNotFoundException("Entity not found");
+            _dbContext.Set<T>().Remove(entity);
+            await _dbContext.SaveChangesAsync(cancellationToken);
+            return new OkResult();
       }
 
 }

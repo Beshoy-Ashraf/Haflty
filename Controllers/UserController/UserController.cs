@@ -28,6 +28,21 @@ public class UserController(IUserService userService) : ControllerBase
       {
             return await service.GetUsersAsync(cancellationToken);
       }
-
+      [HttpGet("get-admin")]
+      public async Task<List<UserDto>> GetAdminUsers(CancellationToken cancellationToken)
+      {
+            return await service.AdminUsers(cancellationToken);
+      }
+      [HttpGet("get-admin-included")]
+      public async Task<List<UserDto>> GetAdminUsers(CancellationToken cancellationToken, [FromQuery] string[] includes)
+      {
+            return await service.AdminUsers(cancellationToken, includes);
+      }
+      [HttpDelete("{id:guid}")]
+      public async Task<IActionResult> DeleteUser([FromRoute] Guid id, CancellationToken cancellationToken)
+      {
+            await service.DeleteUser(id, cancellationToken);
+            return Ok();
+      }
 
 }
