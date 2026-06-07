@@ -7,4 +7,7 @@ public interface IAuthService
 {
       Task<TokenResponseDto> GenerateUser(RegisterUserDto
  UserDto, CancellationToken cancellationToken);
+      Task<TokenResponseDto> RefreshTokenAsync(string token, CancellationToken cancellationToken);
+      Task<TokenResponseDto> UserLogin(UserLoginDto userData, CancellationToken cancellationToken);
+
 }

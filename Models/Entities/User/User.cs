@@ -16,6 +16,7 @@ public class User
       public DateTime BirthDate { get; set; }
       public string QRCode { get; set; } = "";
       public List<Reservation.Reservation> Reservations { get; set; } = [];
+      public List<UserRefreshToken> UserRefreshTokens { get; set; } = [];
 
       public DateTime CreatedDate { get; set; }
       public DateTime UpdatedDate { get; set; }

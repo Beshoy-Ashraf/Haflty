@@ -77,7 +77,7 @@ namespace Haflty.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("HashPassword")
+                    b.Property<string>("Password")
                         .IsRequired()
                         .HasColumnType("text");
 

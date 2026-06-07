@@ -12,5 +12,9 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
             builder.Property(s => s.UserName).IsRequired();
             builder.HasIndex(s => s.UserName).IsUnique();
             builder.Property(s => s.HashPassword).IsRequired();
+
+            builder.HasMany(x => x.UserRefreshTokens)
+            .WithOne(x => x.User)
+            .HasForeignKey(f => f.UserId);
       }
 }
